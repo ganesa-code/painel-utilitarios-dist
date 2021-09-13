@@ -1,0 +1,6 @@
+pm2-installer
+.env
+RootCA.crt
+RootCA.key
+aws.json
+email.json

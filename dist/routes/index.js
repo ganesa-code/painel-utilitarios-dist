@@ -1,0 +1,28 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var express_1 = require("express");
+var produtos_routes_1 = __importDefault(require("./produtos.routes"));
+var reposicao_routes_1 = __importDefault(require("./reposicao.routes"));
+var users_routes_1 = __importDefault(require("./users.routes"));
+var parametros_routes_1 = __importDefault(require("./parametros.routes"));
+var auth_routes_1 = __importDefault(require("./auth.routes"));
+var config_routes_1 = __importDefault(require("./config.routes"));
+var compras_routes_1 = __importDefault(require("./compras.routes"));
+var clientes_routes_1 = __importDefault(require("./clientes.routes"));
+var receber_routes_1 = __importDefault(require("./receber.routes"));
+var adm_conv_routes_1 = __importDefault(require("./adm-conv.routes"));
+var routes = express_1.Router();
+routes.use("/api/v1/login", auth_routes_1.default);
+routes.use("/api/v1/produtos", produtos_routes_1.default);
+routes.use("/api/v1/reposicao", reposicao_routes_1.default);
+routes.use("/api/v1/parametros", parametros_routes_1.default);
+routes.use("/api/v1/config", config_routes_1.default);
+routes.use("/api/v1/compras", compras_routes_1.default);
+routes.use("/api/v1/clientes", clientes_routes_1.default);
+routes.use("/api/v1/users", users_routes_1.default);
+routes.use("/api/v1/receber", receber_routes_1.default);
+routes.use("/api/v1/adm-conv", adm_conv_routes_1.default);
+exports.default = routes;
