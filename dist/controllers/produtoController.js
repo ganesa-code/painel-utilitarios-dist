@@ -51,7 +51,7 @@ var ProdutoController = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         search = req.body.search;
-                        query = "SELECT PRODUTO.CODPROD, PRODUTO.DESCRICAO\n    FROM PRODUTO\n    WHERE PRODUTO.CODPROD LIKE '%" + search + "%'\n      OR PRODUTO.DESCRICAO LIKE '%" + search.replace(" ", "%").toUpperCase() + "%'\n      OR PRODUTO.REFERENCIA LIKE '%" + search + "%';";
+                        query = "SELECT PRODUTO.CODPROD, PRODUTO.DESCRICAO\n    FROM PRODUTO\n    WHERE PRODUTO.CODPROD LIKE '%" + search + "%'\n      OR PRODUTO.DESCRICAO LIKE '%" + search.replace(" ", "%").toUpperCase() + "%'\n      OR PRODUTO.REFERENCIA LIKE '%" + search + "%'\n    ORDER BY PRODUTO.DESCRICAO;";
                         return [4 /*yield*/, firebirdService.attach()];
                     case 1:
                         db = _a.sent();

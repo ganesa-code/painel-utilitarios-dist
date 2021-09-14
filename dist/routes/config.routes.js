@@ -13,4 +13,5 @@ configRouter.post("/gerais", configController.updateConfigsGerais);
 configRouter.get("/email", configController.getMailConfig);
 configRouter.post("/email", configController.updateMailConfig);
 configRouter.get("/email/test", configController.mailTest);
+configRouter.get("/encrypt", configController.encryptAWS);
 exports.default = configRouter;

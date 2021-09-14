@@ -10,7 +10,7 @@ var multer_sharp_s3_1 = __importDefault(require("multer-sharp-s3"));
 var aws_sdk_1 = __importDefault(require("aws-sdk"));
 var path_1 = __importDefault(require("path"));
 var comprasController_1 = __importDefault(require("../controllers/comprasController"));
-var awsConfigPath = path_1.default.resolve(__dirname + '/../' + 'aws.json'); //eslint-disable-line
+var awsConfigPath = path_1.default.resolve(__dirname + "/../" + "aws.json"); //eslint-disable-line
 aws_sdk_1.default.config.loadFromPath(awsConfigPath);
 var endpoint = new aws_sdk_1.default.Endpoint("s3.us-west-000.backblazeb2.com");
 var s3 = new aws_sdk_1.default.S3({ endpoint: endpoint });

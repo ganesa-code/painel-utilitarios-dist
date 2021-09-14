@@ -173,6 +173,30 @@ var ConfigController = /** @class */ (function () {
                 }
             });
         }); };
+        this.encryptAWS = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+            var awsConfigPath, aws, accessKeyId, secretAccessKey, encryptedAccessKeyId, encryptedSecretAccessKey, encryptedData;
+            return __generator(this, function (_a) {
+                awsConfigPath = path_1.default.resolve(__dirname + "/../aws.json");
+                aws = fs_1.default.readFileSync(awsConfigPath, "utf-8");
+                aws = JSON.parse(aws);
+                accessKeyId = aws.accessKeyId, secretAccessKey = aws.secretAccessKey;
+                encryptedAccessKeyId = cryptoService.encrypt(accessKeyId);
+                encryptedSecretAccessKey = cryptoService.encrypt(secretAccessKey);
+                encryptedData = {
+                    accessKeyId: encryptedAccessKeyId,
+                    secretAccessKey: encryptedSecretAccessKey,
+                };
+                try {
+                    fs_1.default.writeFileSync(awsConfigPath, JSON.stringify(encryptedData), "utf8");
+                }
+                catch (err) {
+                    return [2 /*return*/, res
+                            .status(500)
+                            .json({ status: "error", message: "Algo deu errado" })];
+                }
+                return [2 /*return*/, res.status(200).json({ status: "ok", encryptedData: encryptedData })];
+            });
+        }); };
     }
     return ConfigController;
 }());

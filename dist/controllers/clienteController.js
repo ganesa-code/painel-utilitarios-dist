@@ -50,7 +50,7 @@ var ClientesController = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         search = req.body.search;
-                        query = "SELECT CLIENTE.NOME, CLIENTE.CODCLIENTE, CLIENTE.EMAIL\n    FROM CLIENTE\n    WHERE CLIENTE.CODCLIENTE LIKE '%" + search + "%'\n      OR CLIENTE.NOME LIKE '%" + search.replace(" ", "%").toUpperCase() + "%'\n      OR CLIENTE.NOMEFANTASIA LIKE '%" + search.replace(" ", "%").toUpperCase() + "%'\n      OR CLIENTE.CGCCPF LIKE '%" + search + "%'";
+                        query = "SELECT CLIENTE.NOME, CLIENTE.CODCLIENTE, CLIENTE.EMAIL\n    FROM CLIENTE\n    WHERE CLIENTE.CODCLIENTE LIKE '%" + search + "%'\n      OR CLIENTE.NOME LIKE '%" + search.replace(" ", "%").toUpperCase() + "%'\n      OR CLIENTE.NOMEFANTASIA LIKE '%" + search.replace(" ", "%").toUpperCase() + "%'\n      OR CLIENTE.CGCCPF LIKE '%" + search + "%'\n    ORDER BY CLIENTE.NOME;";
                         return [4 /*yield*/, firebirdService.attach()];
                     case 1:
                         db = _a.sent();
