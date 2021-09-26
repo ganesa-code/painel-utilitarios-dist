@@ -4,6 +4,6 @@ call git clone https://github.com/ganesa-code/painel-utilitarios-dist C:\ResWinC
 xcopy "C:\ResWinCs\temp" "C:\ResWinCs\UtilitariosResulth" /h /c /k /e /r /y
 rd /s /q C:\ResWinCs\temp
 cd C:\ResWinCs\UtilitariosResulth
-call npm install
+call npm install --save
 call pm2 "start" utilitariosResulth
 PAUSE
