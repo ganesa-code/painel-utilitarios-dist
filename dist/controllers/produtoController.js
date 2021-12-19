@@ -40,7 +40,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var underscore_1 = require("underscore");
+var fs_1 = __importDefault(require("fs"));
+var path_1 = __importDefault(require("path"));
 var Firebird_1 = __importDefault(require("../services/Firebird"));
+var appError_1 = __importDefault(require("../utils/appError"));
 var firebirdService = new Firebird_1.default();
 var ProdutoController = /** @class */ (function () {
     function ProdutoController() {
@@ -368,12 +371,18 @@ var ProdutoController = /** @class */ (function () {
                 }
             });
         }); };
-        this.updateAllGradesBarCode = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
-            var updateQuery;
+        this.updateAllGradesBarCode = function (req, res, next) { return __awaiter(_this, void 0, void 0, function () {
+            var configPath, config, maxAmountOfCharacters, updateQuery;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        updateQuery = "UPDATE PRODGRADE C\n    SET CODBARRA = (SELECT '799' || CODGRADE || CODPROD FROM PRODGRADE CC\n    WHERE C.CODPROD = CC.CODPROD AND C.CODGRADE = CC.CODGRADE)\n    WHERE CODBARRA = '';";
+                        configPath = path_1.default.resolve(__dirname + "/../config.json");
+                        config = fs_1.default.readFileSync(configPath, "utf-8");
+                        if (!config)
+                            return [2 /*return*/, next(new appError_1.default("Algo deu errado", 400))];
+                        maxAmountOfCharacters = JSON.parse(config).generalConfig
+                            .caracteresCodBarraGrade;
+                        updateQuery = "UPDATE PRODGRADE C\n    SET CODBARRA = (SELECT '" + (maxAmountOfCharacters === 12 ? "99" : "799") + "' || CODGRADE || CODPROD FROM PRODGRADE CC\n    WHERE C.CODPROD = CC.CODPROD AND C.CODGRADE = CC.CODGRADE)\n    WHERE CODBARRA = '';";
                         return [4 /*yield*/, firebirdService.toCommitTransaction(updateQuery)];
                     case 1:
                         _a.sent();
